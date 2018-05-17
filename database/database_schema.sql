@@ -26,7 +26,7 @@ CREATE TABLE profiles (
     member_id INT NOT NULL,
     surname VARCHAR(30) NOT NULL,
     forename VARCHAR(30) NOT NULL,
-    profile_image LONGBLOB,
+    profile_image VARCHAR(120),
     profile_description TINYTEXT,
     email VARCHAR(60) NOT NULL,
     PRIMARY KEY (profile_id),
@@ -36,6 +36,7 @@ CREATE TABLE profiles (
 CREATE TABLE follows (
     member_id INT NOT NULL,
     follower_id INT NOT NULL,
+    PRIMARY KEY (member_id, follower_id),
     FOREIGN KEY (member_id) REFERENCES members(member_id),
     FOREIGN KEY (follower_id) REFERENCES members(member_id)
 );
@@ -52,7 +53,7 @@ CREATE TABLE posts (
     category_id INT NOT NULL,
     member_id INT NOT NULL,
     title TINYTEXT,
-    post_image LONGBLOB,
+    post_image VARCHAR(120),
     post_content LONGTEXT,
     PRIMARY KEY (post_id),
     FOREIGN KEY (category_id) REFERENCES categories(category_id),
@@ -61,12 +62,14 @@ CREATE TABLE posts (
 
 CREATE TABLE hashtags (
     hashtag_id INT NOT NULL AUTO_INCREMENT,
+    hashtag_name VARCHAR(50),
     PRIMARY KEY (hashtag_id)
 );
 
 CREATE TABLE posts_hashtags (
     post_id INT NOT NULL,
     hashtag_id INT NOT NULL,
+    PRIMARY KEY (post_id, hashtag_id),
     FOREIGN KEY (post_id) REFERENCES posts(post_id),
     FOREIGN KEY (hashtag_id) REFERENCES hashtags(hashtag_id)
 );
@@ -74,6 +77,7 @@ CREATE TABLE posts_hashtags (
 CREATE TABLE favourites (
     post_id INT NOT NULL,
     member_id INT NOT NULL,
+    PRIMARY KEY (post_id, member_id),
     FOREIGN KEY (post_id) REFERENCES posts(post_id),
     FOREIGN KEY (member_id) REFERENCES members(member_id)
 );
