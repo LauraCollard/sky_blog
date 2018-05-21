@@ -67,7 +67,7 @@ CREATE TABLE hashtags (
 
 CREATE TABLE posts_hashtags (
     post_id INT NOT NULL,
-    hashtag_id INT NOT NULL,
+    hashtag_id VARCHAR(30) NOT NULL,
     PRIMARY KEY (post_id, hashtag_id),
     FOREIGN KEY (post_id) REFERENCES posts(post_id),
     FOREIGN KEY (hashtag_id) REFERENCES hashtags(hashtag_id)
@@ -92,3 +92,24 @@ CREATE TABLE comments (
     FOREIGN KEY (post_id) REFERENCES posts(post_id),
     FOREIGN KEY (member_id) REFERENCES members(member_id)
 );
+
+-- Trigger to hash passwords
+
+CREATE TRIGGER hash_password BEFORE INSERT ON members
+FOR EACH ROW SET NEW.password = PASSWORD(NEW.password);
+
+-- Stored procedure to add members
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `add_member`(IN `USRNAME` VARCHAR(30), IN `PASS` VARCHAR(50), IN `SECGROUP` VARCHAR(20), IN `SNAME` VARCHAR(30), IN `FNAME` VARCHAR(30), IN `EMAIL` VARCHAR(60), IN `PDESCRIPT` TINYTEXT)
+BEGIN
+insert into members (username, password, security_group)
+values (USRNAME, PASS, SECGROUP);
+insert into profiles (member_id, surname, forename,  email, profile_description) 
+values 
+((select member_id from members where username=USRNAME order by member_id 
+DESC limit 1),
+SNAME, FNAME,  EMAIL, PDESCRIPT);
+END$$
+DELIMITER ;
+
