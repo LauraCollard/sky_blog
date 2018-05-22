@@ -10,7 +10,7 @@ include "class_lib.php";
 // }
 
 /////// DEV
-$_SESSION["id"]= 15;
+$_SESSION["id"]= 2;
 ///////
 
 //fetching member details
@@ -66,11 +66,12 @@ if($member->getSecurity_group()==="writer"){
                         echo "<em>" . $favourite->getPost_content() . "</em>";
                         echo "</div></div>";
                     }
-                }  
+                } else {
+                    echo "You currently don't have favourite posts.";
+                }
                 ?>
             </div>
         </div>
-
 
         <div class="container" id="follows">
             <h2>Follows</h2>
@@ -80,6 +81,8 @@ if($member->getSecurity_group()==="writer"){
                 foreach($followers as $follower){
                     echo $follower . " ";
                 }
+            } else {
+                echo "You currently don't have followers.";
             }
             ?>
             </p>
@@ -89,11 +92,12 @@ if($member->getSecurity_group()==="writer"){
                     foreach($followed as $member){
                         echo $member . " ";
                     }
+                } else {
+                    echo "You currently don't follow any member.";
                 }
                 ?>
             </p>
         </div>
-
 
         <?php
         if(isset($own_posts)){
@@ -103,7 +107,6 @@ if($member->getSecurity_group()==="writer"){
                 echo $post->getTitle();
             }
         }
-
         ?>
 
         
