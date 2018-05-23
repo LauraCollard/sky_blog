@@ -2,6 +2,8 @@ $(document).ready(function(){
     $.getJSON("../models/profileModel.php", function (member){
         console.log(member);
         $("#welcome").append(member.username);
+        var message= "<?php echo $_SESSION['success'];?>";
+        $("#success").append(message);
         $("#profile_image").append("<img src='"+member.profile_image+"'>");
         $("#forename").append(member.forename);
         $("#surname").append(member.surname);

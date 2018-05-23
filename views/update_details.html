@@ -9,10 +9,14 @@
     <body>
         <h1 class="text-center">Update details</span></h1>
         <div class="container">
-            <form method="post" id="update_details">
+            <div>
+                <p>Current profile image:</p>
+                <span id="profile_image"><!--current profile image--></span>
+            </div>
+            <form method="post" id="update_details" action="../models/update_detailsModel.php">
                 <div class="form-group">
                     <label for="forename">Forename:</label>
-                    <input type="text" name="forename" class="form-control" id="forename"/>
+                    <input type="text" name="forename" class="form-control" id="forename" autofocus/>
                 </div>
                 <div class="form-group">
                     <label for="surname">Surname:</label>
@@ -28,14 +32,11 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <input type="password" name="password" class="form-control" id="password" placeholder="********"/>
+                    <input type="password" name="password" class="form-control" id="password" required/>
                 </div>
                 <div class="form-group">
                     <label for="profile_description">Profile description:</label>
                     <input type="textarea" name="profile_description" class="form-control" id="profile_description"/>
-                </div>
-                <div class="form-group">
-                    <label for="profile_image">Profile image</label>
                 </div>
                 <div>
                     <input type="submit" value="Confirm" id="confirm" class="btn btn-primary">
