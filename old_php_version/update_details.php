@@ -21,7 +21,6 @@ if(!empty($_REQUEST["password"])){
 } else {
     echo "Please enter your password to update your details.";
 }
-
 ?>
 
 <html>
@@ -42,7 +41,7 @@ if(!empty($_REQUEST["password"])){
             <form method="post" id="update_details">
                 <div class="form-group">
                     <label for="forename">Forename:</label>
-                    <input type="text" name="forename" class="form-control" id="forename" value="<?=$member->getForename()?>"/>
+                    <input type="text" name="forename" class="form-control" id="forename" value="<?=$member->getForename()?>" autofocus/>
                 </div>
                 <div class="form-group">
                     <label for="surname">Surname:</label>
