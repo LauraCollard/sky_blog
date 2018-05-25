@@ -1,6 +1,7 @@
 # Blog project backup
 
 **Releases:**
+- v0.6: merged with master (my pages not connected to the other ones yet)
 - v0.5: implement image upload for Edit details page
 - v0.4: style added to Edit details page
 - v0.2: update member details MVC version (no image upload)

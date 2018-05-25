@@ -3,7 +3,7 @@ session_start();
 include "../pdo.php";
 include "class_lib.php";
 
-$_SESSION["id"]= 15;
+$_SESSION["id"]= 2;
 
 //fetching member details
 $stmt= $pdo->prepare("SELECT * FROM members m
