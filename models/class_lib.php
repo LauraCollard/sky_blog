@@ -135,6 +135,7 @@ class Post {
     protected $title;
     protected $post_image;
     protected $post_content;
+    
     function __construct($post_id, $post_date, $category_id, $member_id, $title, $post_image, $post_content) {
         $this->post_id = $post_id;
         $this->post_date = $post_date;
