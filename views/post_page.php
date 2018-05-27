@@ -1,3 +1,8 @@
+<?php
+session_start();
+$_SESSION["post_id"]= $_REQUEST["post"];
+?>
+
 <html>
     <head>
         <title>Post</title>

@@ -2,7 +2,7 @@ $(document).ready(function (){
     var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
     $.getJSON("../models/post_model.php", function(post){
-        console.log(post);
+        
         $("#post_title").append("<h1>"+post.title+"</h1>");
         $("#post_username").append("<p>"+post.username+"</p>");
 

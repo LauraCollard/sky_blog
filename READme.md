@@ -1,6 +1,7 @@
 # Blog project backup
 
 **Releases:**
+- v1.0: using cookies and PDO instance
 - v0.9: Follow/unfollow button on Post page
 - v0.8: Leave a comment implemented (Post page)
 - v0.7: Post page initial version

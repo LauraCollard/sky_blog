@@ -1,10 +1,10 @@
 <?php
 session_start();
-include "../pdo.php";
 include "class_lib.php";
+include "../connection.php";
+$pdo = DB::getInstance();
 
-//$member_id= filter_input(INPUT_COOKIE, 'member_id', FILTER_SANITIZE_STRING);
-$member_id= 15;
+$member_id= filter_input(INPUT_COOKIE, 'member_id', FILTER_SANITIZE_STRING);
 $follower_id= 2; //author
 
 $stmt= $pdo->prepare("SELECT * FROM follows
