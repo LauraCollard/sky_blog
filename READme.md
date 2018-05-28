@@ -1,6 +1,7 @@
 # Blog project backup
 
 **Releases:**
+- v1.5: profile tweaks
 - v1.4: search results + design
 - v1.3: search working
 - v1.2: fixed blog picture issue (Profile page)

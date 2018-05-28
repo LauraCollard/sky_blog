@@ -55,6 +55,7 @@ class Member {
     function getFavourites($pdo){
         $stmt= $pdo->prepare("SELECT * FROM posts p
                                 JOIN favourites f ON f.post_id=p.post_id
+                                JOIN members m ON m.member_id=p.member_id
                                 WHERE f.member_id=:id");
         $stmt->execute(array(":id" => $_SESSION["id"]));
         $favourites= [];
@@ -165,6 +166,15 @@ class Post {
     }
     function getPost_content() {
         return $this->post_content;
+    }
+    function getAuthorUsername($pdo){
+        $author_id= $this->member_id;
+        $stmt= $pdo->prepare("SELECT username FROM members WHERE member_id=:member_id");
+        $stmt->execute(array(":member_id" => $author_id));
+        $row= $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row){
+            return $row["username"];
+        }
     }
 }
 class Posts_List {
@@ -307,8 +317,9 @@ class Search {
             $wheres[]= "p.member_id = :author_id";
             $params[":author_id"]= $this->author_id;
         }
-        $sql= "SELECT p.post_id, p.title, p.post_image FROM posts p
-                JOIN posts_hashtags ph ON ph.post_id=p.post_id";
+        $sql= "SELECT p.post_id, p.title, p.post_image, p.post_date, m.username FROM posts p
+                JOIN posts_hashtags ph ON ph.post_id=p.post_id
+                JOIN members m ON m.member_id=p.member_id";
         if(!empty($wheres)){
             $sql.= " WHERE " . implode(" AND ", $wheres);
         }

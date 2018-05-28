@@ -10,3 +10,9 @@ p {
 #search {
     margin-bottom: 50px;
 }
+.date {
+    margin-top: 80px;
+}
+.author {
+    font-size: 20px;
+}

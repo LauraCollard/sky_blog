@@ -22,10 +22,13 @@ $(document).ready(function(){
                     if(results.length===0){
                         $("#results").append("<p>No matching results, sorry!</p>");
                     } else {
-
+                        
                         $("#results").append("<div id='blogposts' class='left'>"
                                             +"<ul id='results_list' style='height:auto;'>");
                         for (var i=0; i<results.length; i++){
+                            var date= new Date(results[i]["post_date"]);
+                            var months= ["January","February","March","April","May","June","July","August","September","October","November","December"];
+                            var month= months[date.getMonth()];
                             $("#results_list").append("<li>"
                                                 +"<div class='blogpic left' style='background-image: url("+results[i]["post_image"]+");'></div>"
                                                 +"<div class='right'>"
@@ -34,6 +37,8 @@ $(document).ready(function(){
                                                 +results[i]["title"]
                                                 +"</a>"
                                                 +"</h1>"
+                                                +"<p class='author'>"+results[i]["username"]+"</p>"
+                                                +"<p class='date'>Posted on "+date.getDate()+" "+month+" "+date.getFullYear()+"</p>"
                                                 +"</div>"
                                                 +"</li>");
                         }  
