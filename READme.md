@@ -1,6 +1,7 @@
 # Blog project backup
 
 **Releases:**
+- v1.6: nav search (category and hashtag) and cleaned Sign up
 - v1.5: profile tweaks
 - v1.4: search results + design
 - v1.3: search working
