@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html> -->
+<!DOCTYPE html>
 
 <?php
 if(isset($_REQUEST["cat"])){
@@ -24,15 +24,26 @@ if(isset($_REQUEST["hashtag"])){
         <!--Fonts-->
         <link rel="stylesheet" type="text/css" href="../_css/ss-pika.css" />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-        <!-- If not signed in, redirect to sign in page -->
     </head>
 
     <body>
         <div id="container">
             <div id="header" class="header-w-btn">
-                <div id='corner-btn'>
-                    <a class='btn btn-outline-light' href='../../controllers/sign_out_controller.php'>Sign out</a>
-                </div>
+                <!-- Display Sign in or Sign out button -->
+                <?php
+                $member_id = filter_input(INPUT_COOKIE, 'member_id', FILTER_SANITIZE_STRING);
+                $security = filter_input(INPUT_COOKIE, 'security', FILTER_SANITIZE_STRING);
+                $category = filter_input(INPUT_GET, 'cat', FILTER_SANITIZE_STRING);
+                if (!$member_id || !$security) {
+                    echo "<div id='corner-btn'>
+                                <a class='btn btn-outline-light' href='sign_in.php'>Sign in</a>
+                              </div>";
+                } else {
+                    echo "<div id='corner-btn'>
+                                <a class='btn btn-outline-light' href='../../controllers/sign_out_controller.php'>Sign out</a>
+                              </div>";
+                }
+                ?>
                 <a href="../../index.php"><img src="../_img/logo/LogoWhite.png"></a>
             </div>
 
@@ -40,7 +51,7 @@ if(isset($_REQUEST["hashtag"])){
             <div id="nav" class="navbar navbar-expand-md navbar-light">
                 <div class="container">
                     <ul>
-                        <li><a class="peach" href="../../index.php">Home</a></li>
+                        <li><a href="../../index.php">Home</a></li>
                     </ul>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -48,11 +59,17 @@ if(isset($_REQUEST["hashtag"])){
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav full">
                             <li><a href="profile.php">Profile</a></li>
-                            <li><a href="nav_search_results.php?cat=1">Laugh</a></li>
-                            <li><a href="nav_search_results.php?cat=2">Innovate</a></li>
-                            <li><a href="nav_search_results.php?cat=3">Learn</a></li>
-                            <li><a href="nav_search_results.php?cat=4">Inspire</a></li>
-                            <li class="icon"><a href="search.html">🔎</a></li>
+                            <li><a <?= ($category === '1') ? "class='peach'": '' ?> href="nav_search_results.php?cat=1">Laugh</a></li>
+                            <li><a <?= ($category === '2') ? "class='peach'": '' ?> href="nav_search_results.php?cat=2">Innovate</a></li>
+                            <li><a <?= ($category === '3') ? "class='peach'": '' ?> href="nav_search_results.php?cat=3">Learn</a></li>
+                            <li><a <?= ($category === '4') ? "class='peach'": '' ?> href="nav_search_results.php?cat=4">Inspire</a></li>
+                            <?php
+                            $security = filter_input(INPUT_COOKIE, 'security', FILTER_SANITIZE_STRING);
+                            if ($security === 'writer') {
+                                echo "<li><a href='write_post.php'>Write</a></li>";
+                            }
+                            ?>
+                            <li class="icon"><a href="search.php">🔎</a></li>
                         </ul>
                     </div>       
                 </div>

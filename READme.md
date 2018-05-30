@@ -1,6 +1,7 @@
 # Blog project backup
 
 **Releases:**
+- v1.9: master branch, last version
 - v1.8: my final version with Anna's data
 - v1.7: implement add/remove from favourites (and add link to Post from Home)
 - v1.6: nav search (category and hashtag) and cleaned Sign up

@@ -146,6 +146,43 @@ class Post {
         $this->post_image = $post_image;
         $this->post_content = $post_content;
     }
+    
+    function new_post($pdo) {
+        $sql = "INSERT INTO posts (category_id, member_id, title, post_content, post_image)
+                VALUES (:category_id, :member_id, :title, :post_content, :image);";
+        $statement = $pdo->prepare($sql);
+        $statement->execute([
+            'category_id' => $this->category_id,
+            'member_id' => $this->member_id,
+            'title' => $this->title,
+            'post_content' => $this->post_content,
+            'image' => $this->post_image
+        ]);
+    }
+    
+    function add_hashtags($pdo, $hashtags, $post_id) {
+        $hashtag_list = explode(' ', $hashtags);
+        
+        foreach ($hashtag_list as $hashtag) {
+            $sql = "INSERT IGNORE INTO hashtags (hashtag_id)
+                    VALUES (:hashtag);";
+            $statement = $pdo->prepare($sql);
+            $statement->execute([
+                'hashtag' => $hashtag
+            ]);  
+        }
+        
+        foreach ($hashtag_list as $hashtag) {
+            $sql = "INSERT IGNORE INTO posts_hashtags (post_id, hashtag_id)
+                    VALUES (:post_id, :hashtag);";
+            $statement = $pdo->prepare($sql);
+            $statement->execute([
+                'post_id' => $post_id,
+                'hashtag' => $hashtag
+            ]);
+        } 
+    }
+    
     function getPost_id() {
         return $this->post_id;
     }
@@ -286,6 +323,7 @@ class rawSearch {
         }
     }
 }
+
 class Search {
     protected $category_id;
     protected $hashtag;
@@ -323,9 +361,12 @@ class Search {
         if(!empty($wheres)){
             $sql.= " WHERE " . implode(" AND ", $wheres);
         }
+        $sql.= " ORDER BY p.post_date DESC";
+
         $stmt= $pdo->prepare($sql);
         $stmt->execute($params);
         while ($row= $stmt->fetch(PDO::FETCH_ASSOC)){
+            $row['post_date'] = date_format(date_create($row['post_date']),"d/m/Y");
             array_push($search_results, $row);
         }
         return $search_results;

@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html> -->
+<!DOCTYPE html>
 <html>
     <head>
         <title>WWC - Profile</title>
@@ -35,24 +35,31 @@
             <div id="nav" class="navbar navbar-expand-md navbar-light">
                 <div class="container">
                     <ul>
-                        <li><a class="peach" href="../../index.php">Home</a></li>
+                        <li><a href="../../index.php">Home</a></li>
                     </ul>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav full">
-                            <li><a href="profile.php">Profile</a></li>
+                            <li><a class="peach" href="profile.php">Profile</a></li>
                             <li><a href="nav_search_results.php?cat=1">Laugh</a></li>
                             <li><a href="nav_search_results.php?cat=2">Innovate</a></li>
                             <li><a href="nav_search_results.php?cat=3">Learn</a></li>
                             <li><a href="nav_search_results.php?cat=4">Inspire</a></li>
-                            <li class="icon"><a href="search.html">🔎</a></li>
+                            <?php
+                            $security = filter_input(INPUT_COOKIE, 'security', FILTER_SANITIZE_STRING);
+                            if ($security === 'writer') {
+                                echo "<li><a href='write_post.php'>Write</a></li>";
+                            }
+                            ?>
+                            <li class="icon"><a href="search.php">🔎</a></li>
                         </ul>
                     </div>       
                 </div>
             </div>
 
+            <div class="container">
             <div id="about" class="right">
                 <h2>About me</h2>
                 <span id="profile_image"><!-- profile image --></span>
@@ -64,22 +71,26 @@
                 <a href="update_details.php" class="" id="edit_details">Edit details</a>
             </div>
 
-            <div class="container" id="own_posts">
-                <!-- if writer: own posts -->
-            </div>
+            <div id="blogPosts" class="left">
+                <div class="container" id="own_posts">
+                    <!-- if writer: own posts -->
+                </div>
 
-            <div class="container" id="favourites">
-                <!-- favourite posts -->
-            </div>
+                <div class="container" id="favourites">
+                    <!-- favourite posts -->
+                </div>
 
-            <div class="container" id="followers">
-                <!-- followers -->
-            </div>
+                <div class="container" id="followers">
+                    <!-- followers -->
+                </div>
 
-            <div class="container" id="followed">
-                <!-- followed members -->
-            </div>
+                <div class="container" id="followed">
+                    <!-- followed members -->
+                </div>
 
+            </div>
+        </div>
+            <div class="clear"></div>
             <!-- needed for the footer to be at the bottom -->
             <!-- NEXT -->
             <div id="nextlink">
