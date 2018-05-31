@@ -65,8 +65,8 @@ $(document).ready(function(){
                 $("#favourites_list").append("<li>"
                                             +"<div class='blogpic left' style='background-image: url("+img_url+");'></div>"
                                             +"<div class='right'>"
-                                            +"<h1>"
-                                            +"<a href='../../views/pages/post_page.php?post="+member.favourites[i][1]+"' class='blog_title'>"
+                                            +"<h1 class='blog_title'>"
+                                            +"<a href='../../views/pages/post_page.php?post="+member.favourites[i][1]+"'>"
                                             +title
                                             +"</a>"
                                             +"</h1>"
@@ -78,7 +78,7 @@ $(document).ready(function(){
             }
         } else {
             $("#favourites").append("<div id='blogposts' class='left' style='margin-bottom:50px;'>"
-                                    +"<h2>My favourite posts</h2>"
+                                    +"<h2 class='text-center'>My favourite posts</h2>"
                                     +"<p class='text-center' id='no_fav'>No favourite posts yet.</p>"
                                     +"</div>");
         }
