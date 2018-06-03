@@ -1,4 +1,4 @@
-# Blog project backup
+# Final Sky project: Women Who Can blog
 
 **Releases:**
 - v2.0: last version, mobile-friendly
